@@ -1,6 +1,5 @@
 import os
 from flask import Flask, request, jsonify
-from jinja2 import Template
 
 import keras
 from keras.preprocessing import image
