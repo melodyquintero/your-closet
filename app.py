@@ -80,7 +80,7 @@ def upload_file():
                 data["success"] = True
 
 
-                return data["prediction"]
+                return jsonify(data)
             
     return '''
 
