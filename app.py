@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify,render_template
 
 import keras
 from keras.preprocessing import image
@@ -14,6 +14,7 @@ graph = None
 # Loading a keras model with flask
 # https://blog.keras.io/building-a-simple-keras-deep-learning-rest-api.html
 
+total = []
 
 def load_model():
     global model
@@ -79,51 +80,9 @@ def upload_file():
                 data["success"] = True
 
 
-                return jsonify(data)
+                return render_template("index.html", prediction=prediction)
             
-    return '''
-
-    
-    <!doctype html>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    
-    <body background="https://furnitureinredsea.com/wp-content/uploads/2018/07/closets-closet-organizers-california-closets-walk-in-closet-concerning-california-closet-laundry-room-of-california-closet-laundry-room.jpg">
-    
-    <title>Your Digital Closet</title>
-
-    <style>
-    .container {
-    opacity: 0.85;
-    background: white;
-    color:black;
-    border-radius: 25px;
-    position: absolute;
-        top: 30%;
-        left: 50%;
-    overflow-y: scroll;
-    padding: 30px;
-    }
-    </style>
-
-    
-    <div class="container">
-
-    <h1>Your Digital Closet</h1>
-    
-    <form method=post enctype=multipart/form-data>
-      <p><input type=file name=file>
-         <input type=submit value=Classify Your Item>
-        </p>
-    </form>
-
-    </div>
-
-    
-
-   
-
-    '''
-
+    return render_template("index.html")
 
 if __name__ == "__main__":
     app.run()
